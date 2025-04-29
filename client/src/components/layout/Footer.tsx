@@ -94,13 +94,8 @@ export default function Footer() {
       
       {/* Copyright */}
       <div className="bg-muted/60 dark:bg-black/60 py-4 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p>© 2025 PowerMaster Enterprises. All rights reserved.</p>
-          <div className="mt-2 md:mt-0 flex space-x-4">
-            <Link href="#" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-foreground transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-foreground transition-colors">Shipping Policy</Link>
-          </div>
         </div>
       </div>
     </footer>
