@@ -3,6 +3,33 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { 
+
+import { useQuery } from "@tanstack/react-query";
+
+function WishlistCount() {
+  const { data: wishlistItems = [] } = useQuery<any[]>({
+    queryKey: ["/api/wishlist"],
+  });
+
+  return (
+    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
+      {wishlistItems.length}
+    </span>
+  );
+}
+
+function CartCount() {
+  const { data: cartItems = [] } = useQuery<any[]>({
+    queryKey: ["/api/cart"],
+  });
+
+  return (
+    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
+      {cartItems.length}
+    </span>
+  );
+}
+
   Search, 
   Heart, 
   ShoppingCart, 
@@ -100,9 +127,7 @@ export default function Header() {
             >
               <Heart className="h-5 w-5" />
               {user && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
-                  0
-                </span>
+                <WishlistCount />
               )}
             </Button>
             
@@ -115,9 +140,7 @@ export default function Header() {
             >
               <ShoppingCart className="h-5 w-5" />
               {user && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
-                  0
-                </span>
+                <CartCount />
               )}
             </Button>
             
