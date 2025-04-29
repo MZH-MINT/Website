@@ -15,8 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { insertUserSchema } from "@shared/schema";
 import { Loader2, Zap } from "lucide-react";
 import { Helmet } from "react-helmet";
@@ -102,10 +100,9 @@ export default function AuthPage() {
         <title>Login or Register - PowerMaster Enterprises</title>
         <meta name="description" content="Sign in to your PowerMaster account or create a new account to shop for car and inverter batteries." />
       </Helmet>
-      <Header />
-      <main className="py-10 bg-gray-50">
+      <main className="py-10 bg-gray-50 dark:bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-8 bg-white dark:bg-muted rounded-lg shadow-md overflow-hidden">
             {/* Form Section */}
             <div className="p-8">
               <div className="flex items-center mb-6">
@@ -350,7 +347,6 @@ export default function AuthPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
