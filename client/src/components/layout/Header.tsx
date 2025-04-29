@@ -2,9 +2,8 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
-import { 
-
 import { useQuery } from "@tanstack/react-query";
+import { 
 
 function WishlistCount() {
   const { data: wishlistItems = [] } = useQuery<any[]>({
