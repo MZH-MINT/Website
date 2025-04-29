@@ -159,21 +159,21 @@ export default function ProductsPage() {
                 <Button
                   variant="link"
                   onClick={() => navigate('/products')}
-                  className={`${category === 'all' ? 'text-primary-700 font-medium' : 'text-gray-600'}`}
+                  className={`${category === 'all' ? 'text-primary-700 dark:text-primary-400 font-medium' : 'text-gray-600 dark:text-gray-400'}`}
                 >
                   All
                 </Button>
                 <Button
                   variant="link"
                   onClick={() => navigate('/products/car')}
-                  className={`${category === 'car' ? 'text-primary-700 font-medium' : 'text-gray-600'}`}
+                  className={`${category === 'car' ? 'text-primary-700 dark:text-primary-400 font-medium' : 'text-gray-600 dark:text-gray-400'}`}
                 >
                   Car Batteries
                 </Button>
                 <Button
                   variant="link"
                   onClick={() => navigate('/products/inverter')}
-                  className={`${category === 'inverter' ? 'text-primary-700 font-medium' : 'text-gray-600'}`}
+                  className={`${category === 'inverter' ? 'text-primary-700 dark:text-primary-400 font-medium' : 'text-gray-600 dark:text-gray-400'}`}
                 >
                   Inverter Batteries
                 </Button>
@@ -204,12 +204,12 @@ export default function ProductsPage() {
               {isLoading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[...Array(6)].map((_, i) => (
-                    <div key={i} className="bg-white rounded-lg shadow-md h-80 animate-pulse">
-                      <div className="h-48 bg-gray-200 rounded-t-lg"></div>
+                    <div key={i} className="bg-white dark:bg-black rounded-lg shadow-md h-80 animate-pulse">
+                      <div className="h-48 bg-gray-200 dark:bg-gray-800 rounded-t-lg"></div>
                       <div className="p-4">
-                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                        <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                        <div className="h-8 bg-gray-200 rounded"></div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mb-2"></div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mb-4"></div>
+                        <div className="h-8 bg-gray-200 dark:bg-gray-800 rounded"></div>
                       </div>
                     </div>
                   ))}
@@ -217,9 +217,9 @@ export default function ProductsPage() {
               ) : (
                 <>
                   {filteredProducts.length === 0 ? (
-                    <div className="bg-white rounded-lg shadow-sm p-10 text-center">
-                      <h3 className="text-xl font-medium text-gray-900 mb-2">No products found</h3>
-                      <p className="text-gray-600 mb-6">
+                    <div className="bg-white dark:bg-black rounded-lg shadow-sm p-10 text-center">
+                      <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">No products found</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
                         No products match your current filter criteria. Try adjusting your filters or browse our categories.
                       </p>
                       <Button onClick={handleClearFilters}>Clear Filters</Button>
@@ -227,7 +227,7 @@ export default function ProductsPage() {
                   ) : (
                     <>
                       <div className="flex justify-between items-center mb-6">
-                        <p className="text-gray-600">Showing {filteredProducts.length} products</p>
+                        <p className="text-gray-600 dark:text-gray-300">Showing {filteredProducts.length} products</p>
                       </div>
                       <ProductGrid products={filteredProducts} />
                     </>

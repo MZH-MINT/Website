@@ -153,19 +153,19 @@ export function ProductCard({ product }: ProductCardProps) {
               )}
             </svg>
           ))}
-          <span className="ml-1 text-gray-500">({product.reviewCount})</span>
+          <span className="ml-1 text-gray-500 dark:text-gray-400">({product.reviewCount})</span>
         </div>
         
         <Link href={`/product/${product.id}`}>
-          <h3 className="font-medium text-gray-900 mb-1 hover:text-primary-700">{product.name}</h3>
+          <h3 className="font-medium text-gray-900 dark:text-white mb-1 hover:text-primary-700 dark:hover:text-primary-400">{product.name}</h3>
         </Link>
-        <p className="text-sm text-gray-500 mb-3">For {product.category === 'car' ? 'Vehicles' : 'Home Backup'}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">For {product.category === 'car' ? 'Vehicles' : 'Home Backup'}</p>
         
         <div className="flex justify-between items-end">
           <div>
-            <span className="text-lg font-bold text-gray-900">₹{Number(product.price).toLocaleString()}</span>
+            <span className="text-lg font-bold text-gray-900 dark:text-white">₹{Number(product.price).toLocaleString()}</span>
             {product.discountPrice && (
-              <span className="text-sm text-gray-500 line-through ml-1">
+              <span className="text-sm text-gray-500 dark:text-gray-400 line-through ml-1">
                 ₹{Number(product.discountPrice).toLocaleString()}
               </span>
             )}
