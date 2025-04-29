@@ -26,39 +26,15 @@ export function ThemeProvider({
   storageKey = "powermaster-theme",
   ...props
 }: ThemeProviderProps) {
-  // Check if we're in a browser environment to prevent SSR errors
-  const isBrowser = typeof window !== 'undefined';
-
   const [theme, setTheme] = React.useState<Theme>(
     () => {
-      if (!isBrowser) return defaultTheme;
+      if (typeof window === "undefined") return defaultTheme;
+      
       return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
     }
   );
 
-  // Handle system theme changes
   React.useEffect(() => {
-    if (!isBrowser) return;
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    
-    const handleChange = () => {
-      if (theme === "system") {
-        document.documentElement.classList.remove("light", "dark");
-        document.documentElement.classList.add(
-          mediaQuery.matches ? "dark" : "light"
-        );
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, isBrowser]);
-
-  // Update theme class on document element
-  React.useEffect(() => {
-    if (!isBrowser) return;
-    
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
 
@@ -70,7 +46,32 @@ export function ThemeProvider({
     } else {
       root.classList.add(theme);
     }
-  }, [theme, isBrowser]);
+  }, [theme]);
+
+  // Handle system theme change
+  React.useEffect(() => {
+    if (theme !== "system") return;
+
+    function handleChange() {
+      const root = window.document.documentElement;
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      
+      root.classList.remove("light", "dark");
+      root.classList.add(systemTheme);
+    }
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", handleChange);
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", handleChange);
+    };
+  }, [theme]);
 
   const value = React.useMemo(
     () => ({
@@ -90,11 +91,12 @@ export function ThemeProvider({
   );
 }
 
-export const useTheme = () => {
+// Use named export for better HMR compatibility
+export function useTheme() {
   const context = React.useContext(ThemeProviderContext);
 
   if (context === undefined)
     throw new Error("useTheme must be used within a ThemeProvider");
 
   return context;
-};
+}
