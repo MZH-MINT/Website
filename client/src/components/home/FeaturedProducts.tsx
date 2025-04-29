@@ -75,7 +75,7 @@ export default function FeaturedProducts() {
           <>
             {products.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-500 dark:text-gray-400">No featured products available at the moment.</p>
+                <p className="text-gray-700 dark:text-gray-200">No featured products available at the moment.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

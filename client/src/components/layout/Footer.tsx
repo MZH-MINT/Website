@@ -15,7 +15,7 @@ export default function Footer() {
               <Zap className="h-6 w-6 text-yellow-400" />
               <span className="text-foreground font-bold text-xl ml-2">PowerMaster</span>
             </div>
-            <p className="mb-4">
+            <p className="mb-4 text-muted-foreground">
               Premium car and inverter batteries with expert service and nationwide warranty.
             </p>
             <div className="flex space-x-4">
@@ -71,19 +71,19 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-yellow-400 mt-1 mr-3" />
-                <span>123 Battery Street, New Delhi - 110001, India</span>
+                <span className="text-muted-foreground">123 Battery Street, New Delhi - 110001, India</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-yellow-400 mr-3" />
-                <span>+91 7010511894</span>
+                <span className="text-muted-foreground">+91 7010511894</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-yellow-400 mr-3" />
-                <span>info@powermaster.in</span>
+                <span className="text-muted-foreground">info@powermaster.in</span>
               </li>
               <li className="flex items-center">
                 <Clock className="h-5 w-5 text-yellow-400 mr-3" />
-                <span>Mon-Sat: 9:00 AM - 7:00 PM</span>
+                <span className="text-muted-foreground">Mon-Sat: 9:00 AM - 7:00 PM</span>
               </li>
             </ul>
           </div>
@@ -95,7 +95,7 @@ export default function Footer() {
       {/* Copyright */}
       <div className="bg-muted/60 dark:bg-black/60 py-4 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>© 2025 PowerMaster Enterprises. All rights reserved.</p>
+          <p className="text-muted-foreground">© 2025 PowerMaster Enterprises. All rights reserved.</p>
         </div>
       </div>
     </footer>

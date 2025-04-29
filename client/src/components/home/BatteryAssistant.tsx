@@ -282,7 +282,7 @@ export default function BatteryAssistant() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Schedule a Free Battery Health Check</h3>
-                    <p className="text-gray-600 dark:text-gray-400">Our experts will check your battery's health and provide recommendations</p>
+                    <p className="text-gray-700 dark:text-gray-200">Our experts will check your battery's health and provide recommendations</p>
                   </div>
                 </div>
                 <Button 
