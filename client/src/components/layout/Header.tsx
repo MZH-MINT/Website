@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { LanguageToggle } from "@/components/common/LanguageToggle";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { 
   Search, 
   Heart, 
@@ -83,8 +83,8 @@ export default function Header() {
           
           {/* User Actions */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
-            {/* Language Toggle */}
-            <LanguageToggle />
+            {/* Theme Toggle */}
+            <ThemeToggle />
             
             {/* Search */}
             <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
@@ -196,9 +196,13 @@ export default function Header() {
                       </SheetClose>
                     ))}
                   </div>
-                  
+
                   <div className="border-t border-gray-200 pt-4 mt-4">
                     <div className="space-y-3">
+                      <div className="px-3 py-2">
+                        <ThemeToggle />
+                      </div>
+                      
                       <SheetClose asChild>
                         <Link
                           href="/auth"
