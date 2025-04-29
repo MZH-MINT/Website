@@ -1,36 +1,8 @@
 import { Link } from "wouter";
 import { Zap, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useToast } from "@/hooks/use-toast";
-
-const newsletterSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-});
-
-type NewsletterFormValues = z.infer<typeof newsletterSchema>;
 
 export default function Footer() {
-  const { toast } = useToast();
-  
-  const form = useForm<NewsletterFormValues>({
-    resolver: zodResolver(newsletterSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-  
-  const onSubmit = (data: NewsletterFormValues) => {
-    toast({
-      title: "Newsletter Subscription",
-      description: "Thank you for subscribing to our newsletter!",
-    });
-    form.reset();
-  };
   
   return (
     <footer className="bg-muted/30 dark:bg-black border-t border-border text-muted-foreground">
@@ -119,38 +91,7 @@ export default function Footer() {
           </div>
         </div>
         
-        {/* Newsletter */}
-        <div className="border-t border-border mt-10 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h4 className="text-foreground font-semibold mb-1">Subscribe to our Newsletter</h4>
-              <p>Get updates about new products and special offers</p>
-            </div>
-            <div className="w-full md:w-auto">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="w-full md:w-64 mr-2">
-                        <FormControl>
-                          <Input
-                            placeholder="Your email address"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit">
-                    Subscribe
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </div>
-        </div>
+        
       </div>
       
       {/* Copyright */}
