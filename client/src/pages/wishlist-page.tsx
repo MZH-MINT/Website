@@ -33,12 +33,12 @@ export default function WishlistPage() {
   const [, navigate] = useLocation();
   const { toast } = useToast();
   const { user } = useAuth();
-  
+
   // Fetch wishlist items
   const { data: wishlistItems = [], isLoading, refetch } = useQuery<WishlistItemWithProduct[]>({
     queryKey: ["/api/wishlist"],
   });
-  
+
   // Remove from wishlist mutation
   const removeFromWishlistMutation = useMutation({
     mutationFn: async (id: number) => {
@@ -59,18 +59,18 @@ export default function WishlistPage() {
       });
     },
   });
-  
+
   // Add to cart mutation
   const addToCartMutation = useMutation({
     mutationFn: async (productId: number) => {
       if (!user) return null;
-      
+
       const cartItem = insertCartItemSchema.parse({
         userId: user.id,
         productId: productId,
         quantity: 1
       });
-      
+
       const res = await apiRequest("POST", "/api/cart", cartItem);
       return res.json();
     },
@@ -90,7 +90,7 @@ export default function WishlistPage() {
       });
     },
   });
-  
+
   // Empty wishlist view
   if (!isLoading && wishlistItems.length === 0) {
     return (
@@ -99,51 +99,51 @@ export default function WishlistPage() {
           <title>Your Wishlist - PowerMaster Enterprises</title>
           <meta name="description" content="View and manage your saved products" />
         </Helmet>
-        
+
         <main className="py-10 bg-gray-50 dark:bg-gray-900 min-h-[calc(100vh-240px)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 text-center max-w-xl mx-auto">
-              <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                <Heart className="h-8 w-8 text-gray-400" />
+              <div className="w-16 h-16 mx-auto bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-6">
+                <Heart className="h-8 w-8 text-gray-400 dark:text-gray-300" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">Your wishlist is empty</h1>
-              <p className="text-gray-600 mb-6">Save your favorite products to your wishlist for later.</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Your wishlist is empty</h1>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">Save your favorite products to your wishlist for later.</p>
               <Button 
                 size="lg"
                 onClick={() => navigate("/products")}
-                className="bg-primary-700 hover:bg-primary-600"
+                className="bg-primary-700 hover:bg-primary-600 dark:bg-primary-500 dark:hover:bg-primary-400"
               >
                 Browse Products
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 dark:text-gray-100" />
               </Button>
             </div>
           </div>
         </main>
-        
+
       </>
     );
   }
-  
+
   return (
     <>
       <Helmet>
         <title>Your Wishlist - PowerMaster Enterprises</title>
         <meta name="description" content="View and manage your saved products" />
       </Helmet>
-      
-      <main className="py-10 bg-gray-50">
+
+      <main className="py-10 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Your Wishlist</h1>
-          
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Your Wishlist</h1>
+
           {isLoading ? (
             <div className="text-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary-600" />
-              <p className="text-gray-600">Loading your wishlist...</p>
+              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary-600 dark:text-primary-400" />
+              <p className="text-gray-600 dark:text-gray-400">Loading your wishlist...</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {wishlistItems.map((item) => (
-                <Card key={item.id} className="overflow-hidden">
+                <Card key={item.id} className="overflow-hidden dark:bg-gray-800">
                   <CardHeader className="p-0">
                     <div className="relative h-48 w-full">
                       <img 
@@ -154,26 +154,26 @@ export default function WishlistPage() {
                         style={{ cursor: 'pointer' }}
                       />
                       <button 
-                        className="absolute top-2 right-2 p-1 bg-white rounded-full text-red-500 hover:text-red-700 shadow-sm"
+                        className="absolute top-2 right-2 p-1 bg-white dark:bg-gray-700 rounded-full text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 shadow-sm"
                         onClick={() => removeFromWishlistMutation.mutate(item.id)}
                         disabled={removeFromWishlistMutation.isPending}
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4 dark:text-red-400" />
                       </button>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-4">
+                  <CardContent className="pt-4 dark:text-gray-300">
                     <h3 
-                      className="font-medium text-gray-900 mb-1 hover:text-primary-700 cursor-pointer"
+                      className="font-medium text-gray-900 dark:text-gray-100 mb-1 hover:text-primary-700 dark:hover:text-primary-400 cursor-pointer"
                       onClick={() => navigate(`/product/${item.product.id}`)}
                     >
                       {item.product.name}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-2">{item.product.brand}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.product.brand}</p>
                     <div className="flex items-center">
-                      <span className="font-bold text-gray-900">₹{Number(item.product.price).toLocaleString()}</span>
+                      <span className="font-bold text-gray-900 dark:text-gray-100">₹{Number(item.product.price).toLocaleString()}</span>
                       {item.product.discountPrice && (
-                        <span className="ml-2 text-sm text-gray-500 line-through">
+                        <span className="ml-2 text-sm text-gray-500 dark:text-gray-400 line-through">
                           ₹{Number(item.product.discountPrice).toLocaleString()}
                         </span>
                       )}
@@ -181,15 +181,15 @@ export default function WishlistPage() {
                   </CardContent>
                   <CardFooter>
                     <Button 
-                      className="w-full"
+                      className="w-full dark:bg-primary-500 dark:hover:bg-primary-400"
                       onClick={() => addToCartMutation.mutate(item.product.id)}
                       disabled={addToCartMutation.isPending}
                     >
                       {addToCartMutation.isPending ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin dark:text-gray-100" />
                       ) : (
                         <>
-                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          <ShoppingCart className="mr-2 h-4 w-4 dark:text-gray-100" />
                           Add to Cart
                         </>
                       )}
@@ -201,7 +201,7 @@ export default function WishlistPage() {
           )}
         </div>
       </main>
-      
+
     </>
   );
 }
