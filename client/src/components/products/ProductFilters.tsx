@@ -65,7 +65,7 @@ export function ProductFilters({
     <div className="space-y-6">
       {/* Brand Filter */}
       <div>
-        <h3 className="text-sm font-medium text-gray-900 mb-3">Brand</h3>
+        <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Brand</h3>
         <div className="space-y-2">
           {brands.map((brand) => (
             <div key={brand} className="flex items-center">
@@ -74,7 +74,7 @@ export function ProductFilters({
                 checked={selectedFilters.brand.includes(brand)}
                 onCheckedChange={(checked) => handleBrandChange(brand, checked as boolean)}
               />
-              <Label htmlFor={`brand-${brand}`} className="ml-2 text-sm text-gray-600">
+              <Label htmlFor={`brand-${brand}`} className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                 {brand}
               </Label>
             </div>
@@ -84,7 +84,7 @@ export function ProductFilters({
       
       {/* Price Range Filter */}
       <div>
-        <h3 className="text-sm font-medium text-gray-900 mb-3">Price Range</h3>
+        <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Price Range</h3>
         <div className="mb-6">
           <Slider
             defaultValue={[priceRange[0], priceRange[1]]}
@@ -96,7 +96,7 @@ export function ProductFilters({
             onValueCommit={handlePriceChangeEnd}
             className="my-6"
           />
-          <div className="flex justify-between text-sm text-gray-600">
+          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
             <span>{formatPrice(localPriceRange[0])}</span>
             <span>{formatPrice(localPriceRange[1])}</span>
           </div>

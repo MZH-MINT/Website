@@ -105,13 +105,13 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Product badges */}
         <div className="absolute top-2 left-2">
           {product.bestSeller && (
-            <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded block mb-1">Best Seller</span>
+            <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-medium px-2 py-1 rounded block mb-1">Best Seller</span>
           )}
           {product.newArrival && (
-            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded block mb-1">New Arrival</span>
+            <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs font-medium px-2 py-1 rounded block mb-1">New Arrival</span>
           )}
           {product.limitedStock && (
-            <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded block mb-1">Limited Stock</span>
+            <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-medium px-2 py-1 rounded block mb-1">Limited Stock</span>
           )}
         </div>
         
@@ -120,7 +120,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 rounded-full bg-white shadow-sm"
+            className="h-8 w-8 rounded-full bg-white dark:bg-gray-800 shadow-sm"
             onClick={() => addToWishlistMutation.mutate()}
             disabled={addToWishlistMutation.isPending}
           >
@@ -138,7 +138,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {[...Array(5)].map((_, i) => (
             <svg 
               key={i} 
-              className={i < Math.floor(Number(product.ratings)) ? "fill-current" : i < Number(product.ratings) ? "fill-current" : "text-gray-300"}
+              className={i < Math.floor(Number(product.ratings)) ? "fill-current" : i < Number(product.ratings) ? "fill-current" : "text-gray-300 dark:text-gray-700"}
               xmlns="http://www.w3.org/2000/svg" 
               width="16" 
               height="16" 

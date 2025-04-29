@@ -25,11 +25,11 @@ export default function Benefits() {
   ];
   
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Why Choose PowerMaster</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">We offer more than just batteries - we provide complete power solutions with expert service</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Why Choose PowerMaster</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">We offer more than just batteries - we provide complete power solutions with expert service</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -38,8 +38,8 @@ export default function Benefits() {
               <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-700 mb-4">
                 {benefit.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-              <p className="text-gray-600">{benefit.description}</p>
+              <h3 className="text-xl font-semibold mb-2 dark:text-white">{benefit.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
             </div>
           ))}
         </div>
