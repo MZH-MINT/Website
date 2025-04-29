@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { useQuery } from "@tanstack/react-query";
 import { 
+  Search, 
+  Heart, 
+  ShoppingCart, 
+  User, 
+  Menu, 
+  LogOut, 
+  Zap,
+  UserCircle
+} from "lucide-react";
+import { useState } from "react";
 
 function WishlistCount() {
   const { data: wishlistItems = [] } = useQuery<any[]>({
