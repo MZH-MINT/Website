@@ -85,20 +85,20 @@ export default function BatteryAssistant() {
   });
   
   return (
-    <section id="battery-assistant" className="py-10 bg-gradient-to-b from-primary-50 to-white">
+    <section id="battery-assistant" className="py-10 bg-gradient-to-b from-primary-50 to-white dark:from-gray-950 dark:to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Battery Fitment Assistant</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Battery Fitment Assistant</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Not sure which battery fits your vehicle or inverter? Our assistant helps you find the perfect match.
           </p>
         </div>
         
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden">
           <div className="p-6 sm:p-10">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Car Battery Selector */}
-              <div className="flex-1 bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <div className="flex-1 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center mb-4">
                   <Car className="h-6 w-6 text-primary-700 mr-3" />
                   <h3 className="text-xl font-semibold">Find Car Battery</h3>
@@ -106,7 +106,7 @@ export default function BatteryAssistant() {
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Car Brand</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">Car Brand</label>
                     <Select
                       value={carBrand}
                       onValueChange={setCarBrand}
@@ -125,7 +125,7 @@ export default function BatteryAssistant() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Car Model</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Car Model</label>
                     <Select
                       value={carModel}
                       onValueChange={setCarModel}
@@ -147,7 +147,7 @@ export default function BatteryAssistant() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year</label>
                     <Select
                       value={carYear}
                       onValueChange={setCarYear}
@@ -176,7 +176,7 @@ export default function BatteryAssistant() {
               </div>
               
               {/* Inverter Battery Selector */}
-              <div className="flex-1 bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <div className="flex-1 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center mb-4">
                   <Zap className="h-6 w-6 text-primary-700 mr-3" />
                   <h3 className="text-xl font-semibold">Find Inverter Battery</h3>
@@ -184,7 +184,7 @@ export default function BatteryAssistant() {
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Inverter Brand</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Inverter Brand</label>
                     <Select
                       value={inverterBrand}
                       onValueChange={setInverterBrand}
@@ -203,7 +203,7 @@ export default function BatteryAssistant() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Inverter Capacity</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Inverter Capacity</label>
                     <Select
                       value={inverterCapacity}
                       onValueChange={setInverterCapacity}
@@ -221,7 +221,7 @@ export default function BatteryAssistant() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Backup Required</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Backup Required</label>
                     <Select
                       value={backupRequired}
                       onValueChange={setBackupRequired}
@@ -257,11 +257,11 @@ export default function BatteryAssistant() {
                 </h3>
                 
                 {showCarResults && carResults.length === 0 && (
-                  <p className="text-gray-600">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
+                  <p className="text-gray-600 dark:text-gray-400">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
                 )}
                 
                 {showInverterResults && inverterResults.length === 0 && (
-                  <p className="text-gray-600">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
+                  <p className="text-gray-600 dark:text-gray-400">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
                 )}
                 
                 {showCarResults && carResults.length > 0 && (
