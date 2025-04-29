@@ -49,9 +49,7 @@ export default function Footer() {
               <li><Link href="/products/car" className="hover:text-foreground transition-colors">Car Batteries</Link></li>
               <li><Link href="/products/inverter" className="hover:text-foreground transition-colors">Inverter Batteries</Link></li>
               <li><Link href="/#battery-assistant" className="hover:text-foreground transition-colors">Battery Finder</Link></li>
-              <li><Link href="#" className="hover:text-foreground transition-colors">Warranty Policy</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors">Battery Maintenance Tips</Link></li>
-              <li><Link href="#" className="hover:text-foreground transition-colors">Track Your Order</Link></li>
             </ul>
           </div>
           
