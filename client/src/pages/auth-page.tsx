@@ -100,14 +100,14 @@ export default function AuthPage() {
         <title>Login or Register - PowerMaster Enterprises</title>
         <meta name="description" content="Sign in to your PowerMaster account or create a new account to shop for car and inverter batteries." />
       </Helmet>
-      <main className="py-10 bg-gray-50 dark:bg-background">
+      <main className="py-10 bg-gray-50 dark:bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 bg-white dark:bg-muted rounded-lg shadow-md overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-8 bg-white dark:bg-black rounded-lg shadow-md overflow-hidden">
             {/* Form Section */}
             <div className="p-8">
               <div className="flex items-center mb-6">
                 <Zap className="h-8 w-8 text-yellow-400" />
-                <h1 className="text-2xl font-bold ml-2 text-gray-900">PowerMaster Account</h1>
+                <h1 className="text-2xl font-bold ml-2 text-gray-900 dark:text-white">PowerMaster Account</h1>
               </div>
               
               <Tabs defaultValue="login" className="w-full">
@@ -119,8 +119,8 @@ export default function AuthPage() {
                 {/* Login Form */}
                 <TabsContent value="login">
                   <div className="mb-4">
-                    <h2 className="text-xl font-semibold text-gray-900">Welcome Back!</h2>
-                    <p className="text-gray-600">Sign in to access your account</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Welcome Back!</h2>
+                    <p className="text-gray-600 dark:text-gray-300">Sign in to access your account</p>
                   </div>
                   
                   <Form {...loginForm}>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white dark:bg-gray-950">
+    <section className="relative overflow-hidden bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-10 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
@@ -26,7 +26,7 @@ export default function Hero() {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-primary-800 text-primary-800 dark:border-primary-400 dark:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="border-primary-800 text-primary-800 dark:border-primary-400 dark:text-primary-400 hover:bg-gray-50 dark:hover:bg-black"
                 asChild
               >
                 <Link href="/products/inverter">
@@ -47,7 +47,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="bg-primary-800 dark:bg-primary-900 py-3 text-white relative overflow-hidden">
+      <div className="bg-primary-800 dark:bg-black py-3 text-white relative overflow-hidden">
         <div className="flex">
           <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
             <span className="mx-4 text-sm">✓ Premium Quality Batteries</span>
