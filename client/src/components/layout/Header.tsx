@@ -54,7 +54,6 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Car Batteries", href: "/products/car" },
     { name: "Inverter Batteries", href: "/products/inverter" },
-    { name: "Battery Assistant", href: "/#battery-assistant" },
     { name: "Contact", href: "/#contact" },
   ];
   
