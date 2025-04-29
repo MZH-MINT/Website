@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="bg-muted/30 dark:bg-black border-t border-border text-muted-foreground">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-4">
@@ -50,18 +50,6 @@ export default function Footer() {
               <li><Link href="/products/inverter" className="hover:text-foreground transition-colors">Inverter Batteries</Link></li>
               <li><Link href="/#battery-assistant" className="hover:text-foreground transition-colors">Battery Finder</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors">Battery Maintenance Tips</Link></li>
-            </ul>
-          </div>
-          
-          {/* Account */}
-          <div>
-            <h3 className="text-foreground font-semibold text-lg mb-4">My Account</h3>
-            <ul className="space-y-2">
-              <li><Link href="/auth" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Sign In / Register</Link></li>
-              <li><Link href="/profile" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>My Orders</Link></li>
-              <li><Link href="/wishlist" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Wishlist</Link></li>
-              <li><Link href="/cart" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Shopping Cart</Link></li>
-              <li><Link href="/profile" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Profile Settings</Link></li>
             </ul>
           </div>
           
