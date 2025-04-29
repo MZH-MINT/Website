@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { useQuery } from "@tanstack/react-query";
-import { Search, Heart, ShoppingCart, User, Menu, LogOut, Zap, UserCircle } from "lucide-react";
+import { Search, Heart, ShoppingCart, User, Menu, LogOut, Zap, UserCircle, Phone, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -54,19 +54,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Car Batteries", href: "/products/car" },
     { name: "Inverter Batteries", href: "/products/inverter" },
-    { 
-      name: "Contact", 
-      href: "#contact",
-      onClick: (e: React.MouseEvent) => {
-        e.preventDefault();
-        const element = document.getElementById('contact');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          element.classList.add('highlight-section');
-          setTimeout(() => element.classList.remove('highlight-section'), 2000);
-        }
-      }
-    },
+    { name: "Battery Assistant", href: "/#battery-assistant" },
   ];
   
   const handleLogout = () => {
@@ -80,6 +68,22 @@ export default function Header() {
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50">
+      {/* Contact Information Bar */}
+      <div className="bg-primary text-primary-foreground py-1 hidden sm:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center text-sm">
+              <Phone className="h-4 w-4 mr-1" />
+              <span>+91 7010511894</span>
+            </div>
+            <div className="flex items-center text-sm">
+              <MessageCircle className="h-4 w-4 mr-1" />
+              <span>WhatsApp: +91 7010511894</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Navigation */}
@@ -202,6 +206,18 @@ export default function Header() {
                   <div className="flex items-center mb-8">
                     <Zap className="h-6 w-6 text-yellow-400" />
                     <span className="text-foreground font-bold text-xl ml-2">PowerMaster</span>
+                  </div>
+                  
+                  {/* Contact Info in Mobile Menu */}
+                  <div className="mb-6 space-y-3">
+                    <div className="flex items-center text-sm text-foreground">
+                      <Phone className="h-4 w-4 mr-2" />
+                      <span>+91 7010511894</span>
+                    </div>
+                    <div className="flex items-center text-sm text-foreground">
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      <span>WhatsApp: +91 7010511894</span>
+                    </div>
                   </div>
                   
                   <div className="space-y-1">
