@@ -100,9 +100,9 @@ export default function WishlistPage() {
           <meta name="description" content="View and manage your saved products" />
         </Helmet>
         
-        <main className="py-10 bg-gray-50 min-h-[calc(100vh-240px)]">
+        <main className="py-10 bg-gray-50 dark:bg-gray-900 min-h-[calc(100vh-240px)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-lg shadow-sm p-8 text-center max-w-xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 text-center max-w-xl mx-auto">
               <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-6">
                 <Heart className="h-8 w-8 text-gray-400" />
               </div>
