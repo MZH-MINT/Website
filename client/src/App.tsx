@@ -1,0 +1,39 @@
+import { Switch, Route } from "wouter";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import NotFound from "@/pages/not-found";
+import HomePage from "@/pages/home-page";
+import AuthPage from "@/pages/auth-page";
+import ProductsPage from "@/pages/products-page";
+import ProductDetailPage from "@/pages/product-detail-page";
+import CartPage from "@/pages/cart-page";
+import WishlistPage from "@/pages/wishlist-page";
+import ProfilePage from "@/pages/profile-page";
+import { ProtectedRoute } from "./lib/protected-route";
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={HomePage} />
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/products" component={ProductsPage} />
+      <Route path="/products/:category" component={ProductsPage} />
+      <Route path="/product/:id" component={ProductDetailPage} />
+      <ProtectedRoute path="/cart" component={CartPage} />
+      <ProtectedRoute path="/wishlist" component={WishlistPage} />
+      <ProtectedRoute path="/profile" component={ProfilePage} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <TooltipProvider>
+      <Toaster />
+      <Router />
+    </TooltipProvider>
+  );
+}
+
+export default App;
