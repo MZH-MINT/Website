@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
           
           {/* Contact Info */}
-          <div>
+          <div id="contact">
             <h3 className="text-foreground font-semibold text-lg mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">

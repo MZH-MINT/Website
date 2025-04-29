@@ -54,7 +54,19 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Car Batteries", href: "/products/car" },
     { name: "Inverter Batteries", href: "/products/inverter" },
-    { name: "Contact", href: "/#contact" },
+    { 
+      name: "Contact", 
+      href: "#contact",
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          element.classList.add('highlight-section');
+          setTimeout(() => element.classList.remove('highlight-section'), 2000);
+        }
+      }
+    },
   ];
   
   const handleLogout = () => {
