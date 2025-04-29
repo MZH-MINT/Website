@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Product } from "@shared/schema";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Loader2 } from "lucide-react";
+import { Heart, ShoppingCart, Loader2, Minus, Plus } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { insertCartItemSchema, insertWishlistItemSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
@@ -19,6 +19,15 @@ export function ProductCard({ product }: ProductCardProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Check if product is already in cart
+  const { data: cartItems = [] } = useQuery<any[]>({
+    queryKey: ["/api/cart"],
+    enabled: !!user, // Only run query if user is logged in
+  });
+  
+  // Find this product in cart
+  const cartItem = cartItems.find(item => item.productId === product.id);
   
   // Add to cart mutation
   const addToCartMutation = useMutation({
@@ -48,6 +57,46 @@ export function ProductCard({ product }: ProductCardProps) {
     onError: (error: Error) => {
       toast({
         title: "Failed to add to cart",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Update cart quantity mutation
+  const updateCartMutation = useMutation({
+    mutationFn: async ({ id, quantity }: { id: number; quantity: number }) => {
+      const res = await apiRequest("PUT", `/api/cart/${id}`, { quantity });
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/cart"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Failed to update cart",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Remove from cart mutation
+  const removeFromCartMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const res = await apiRequest("DELETE", `/api/cart/${id}`);
+      return res.ok;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Removed from cart",
+        description: "Product has been removed from your cart",
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/cart"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Failed to remove from cart",
         description: error.message,
         variant: "destructive",
       });
@@ -174,20 +223,68 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
       
       <CardFooter className="px-4 pb-4 pt-0">
-        <Button 
-          className="w-full"
-          onClick={() => addToCartMutation.mutate()}
-          disabled={addToCartMutation.isPending || product.stock === 0}
-        >
-          {addToCartMutation.isPending ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <>
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
-            </>
-          )}
-        </Button>
+        {cartItem ? (
+          // Show quantity controls if product is in cart
+          <div className="flex items-center justify-between w-full border border-input rounded-md overflow-hidden">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="rounded-none h-10 px-3"
+              onClick={() => {
+                if (cartItem.quantity === 1) {
+                  removeFromCartMutation.mutate(cartItem.id);
+                } else {
+                  updateCartMutation.mutate({ 
+                    id: cartItem.id, 
+                    quantity: cartItem.quantity - 1 
+                  });
+                }
+              }}
+              disabled={updateCartMutation.isPending || removeFromCartMutation.isPending}
+            >
+              <Minus className="h-4 w-4" />
+            </Button>
+            
+            <span className="font-medium text-center w-10">
+              {updateCartMutation.isPending ? (
+                <Loader2 className="h-4 w-4 animate-spin mx-auto" />
+              ) : (
+                cartItem.quantity
+              )}
+            </span>
+            
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="rounded-none h-10 px-3"
+              onClick={() => {
+                updateCartMutation.mutate({ 
+                  id: cartItem.id, 
+                  quantity: cartItem.quantity + 1 
+                });
+              }}
+              disabled={updateCartMutation.isPending || product.stock <= cartItem.quantity}
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : (
+          // Show Add to Cart button if product is not in cart
+          <Button 
+            className="w-full"
+            onClick={() => addToCartMutation.mutate()}
+            disabled={addToCartMutation.isPending || product.stock === 0}
+          >
+            {addToCartMutation.isPending ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <>
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+              </>
+            )}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

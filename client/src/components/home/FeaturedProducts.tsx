@@ -33,7 +33,7 @@ export default function FeaturedProducts() {
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Featured Products</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">Our most popular batteries with exceptional performance</p>
+            <p className="text-lg text-gray-700 dark:text-gray-200">Our most popular batteries with exceptional performance</p>
           </div>
           <div className="mt-4 md:mt-0 flex space-x-2">
             <Button 
