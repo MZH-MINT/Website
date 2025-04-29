@@ -10,6 +10,8 @@ import CartPage from "@/pages/cart-page";
 import WishlistPage from "@/pages/wishlist-page";
 import ProfilePage from "@/pages/profile-page";
 import { ProtectedRoute } from "./lib/protected-route";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 function Router() {
   return (
@@ -29,10 +31,16 @@ function Router() {
 
 function App() {
   return (
-    <TooltipProvider>
-      <Toaster />
-      <Router />
-    </TooltipProvider>
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
+      <TooltipProvider>
+        <Header />
+        <main className="flex-grow">
+          <Router />
+        </main>
+        <Footer />
+        <Toaster />
+      </TooltipProvider>
+    </div>
   );
 }
 
