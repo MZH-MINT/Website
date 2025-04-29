@@ -182,16 +182,22 @@ export class DatabaseStorage implements IStorage {
 
     if (existingItem) {
       // Update quantity if it exists
+      const quantity = existingItem.quantity + (cartItemData.quantity || 1);
       const [updatedItem] = await db
         .update(cartItems)
-        .set({ quantity: existingItem.quantity + cartItemData.quantity })
+        .set({ quantity })
         .where(eq(cartItems.id, existingItem.id))
         .returning();
       return updatedItem;
     }
 
     // Insert new item if it doesn't exist
-    const [cartItem] = await db.insert(cartItems).values(cartItemData).returning();
+    // Ensure quantity is at least 1
+    const itemToInsert = {
+      ...cartItemData,
+      quantity: cartItemData.quantity || 1
+    };
+    const [cartItem] = await db.insert(cartItems).values(itemToInsert).returning();
     return cartItem;
   }
 
@@ -205,8 +211,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async removeFromCart(id: number): Promise<boolean> {
-    const result = await db.delete(cartItems).where(eq(cartItems.id, id));
-    return result.count > 0;
+    await db.delete(cartItems).where(eq(cartItems.id, id));
+    return true;
   }
 
   async clearCart(userId: number): Promise<boolean> {
@@ -256,8 +262,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async removeFromWishlist(id: number): Promise<boolean> {
-    const result = await db.delete(wishlistItems).where(eq(wishlistItems.id, id));
-    return result.count > 0;
+    await db.delete(wishlistItems).where(eq(wishlistItems.id, id));
+    return true;
   }
 
   // Order operations
