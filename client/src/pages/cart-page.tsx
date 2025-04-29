@@ -195,14 +195,14 @@ export default function CartPage() {
         <meta name="description" content="View and manage items in your shopping cart" />
       </Helmet>
       
-      <main className="py-10 bg-gray-50">
+      <main className="py-10 bg-gray-50 dark:bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Your Cart</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Your Cart</h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
                 {isLoading ? (
                   <div className="p-8 text-center">
                     <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary-600 mb-4" />
@@ -232,12 +232,12 @@ export default function CartPage() {
             
             {/* Order Summary & Checkout */}
             <div>
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-gray-200">
-                  <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Order Summary</h2>
                 </div>
                 <div className="p-6 space-y-4">
-                  <div className="flex justify-between text-gray-600">
+                  <div className="flex justify-between text-gray-600 dark:text-gray-300">
                     <span>Subtotal</span>
                     <span>₹{subtotal.toLocaleString()}</span>
                   </div>
