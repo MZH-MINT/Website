@@ -45,7 +45,7 @@ export default function Benefits() {
         </div>
         
         {/* Testimonial */}
-        <div className="mt-16 bg-gray-50 rounded-xl p-8 relative">
+        <div className="mt-16 bg-gray-50 dark:bg-gray-900 rounded-xl p-8 relative">
           <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-primary-900 px-4 py-1 rounded-full font-bold">
             Customer Stories
           </div>
@@ -67,18 +67,18 @@ export default function Benefits() {
                   </svg>
                 ))}
               </div>
-              <blockquote className="text-xl italic text-gray-800 mb-4">
+              <blockquote className="text-xl italic text-gray-800 dark:text-gray-200 mb-4">
                 "PowerMaster provided exceptional service when my car wouldn't start. Their expert came, diagnosed the issue, and replaced my battery within hours. The new battery works perfectly and came with a solid warranty."
               </blockquote>
               <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700">
+                <div className="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <p className="font-medium text-gray-900">Rajesh Kumar</p>
-                  <p className="text-gray-600 text-sm">Hyundai Creta Owner, Delhi</p>
+                  <p className="font-medium text-gray-900 dark:text-white">Rajesh Kumar</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">Hyundai Creta Owner, Delhi</p>
                 </div>
               </div>
             </div>

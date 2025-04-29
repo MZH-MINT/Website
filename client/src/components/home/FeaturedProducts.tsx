@@ -28,12 +28,12 @@ export default function FeaturedProducts() {
   };
   
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-gray-50 dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Products</h2>
-            <p className="text-lg text-gray-600">Our most popular batteries with exceptional performance</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Featured Products</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">Our most popular batteries with exceptional performance</p>
           </div>
           <div className="mt-4 md:mt-0 flex space-x-2">
             <Button 
@@ -41,7 +41,7 @@ export default function FeaturedProducts() {
               size="icon" 
               onClick={goToPrevPage} 
               disabled={currentPage === 0}
-              className="p-2 rounded-full bg-white border border-gray-300 text-gray-500 hover:bg-primary-50 hover:text-primary-700"
+              className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-primary-50 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-400"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -50,7 +50,7 @@ export default function FeaturedProducts() {
               size="icon" 
               onClick={goToNextPage} 
               disabled={currentPage >= totalPages - 1 || products.length <= itemsPerPage}
-              className="p-2 rounded-full bg-white border border-gray-300 text-gray-500 hover:bg-primary-50 hover:text-primary-700"
+              className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-primary-50 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-400"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -61,12 +61,12 @@ export default function FeaturedProducts() {
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md h-80 animate-pulse">
-                <div className="h-48 bg-gray-200 rounded-t-lg"></div>
+              <div key={i} className="bg-white dark:bg-black rounded-lg shadow-md h-80 animate-pulse">
+                <div className="h-48 bg-gray-200 dark:bg-gray-800 rounded-t-lg"></div>
                 <div className="p-4">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                  <div className="h-8 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mb-4"></div>
+                  <div className="h-8 bg-gray-200 dark:bg-gray-800 rounded"></div>
                 </div>
               </div>
             ))}
@@ -75,7 +75,7 @@ export default function FeaturedProducts() {
           <>
             {products.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-500">No featured products available at the moment.</p>
+                <p className="text-gray-500 dark:text-gray-400">No featured products available at the moment.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -88,7 +88,7 @@ export default function FeaturedProducts() {
         )}
         
         <div className="mt-8 text-center">
-          <Link href="/products" className="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium">
+          <Link href="/products" className="inline-flex items-center text-primary-700 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400 font-medium">
             View All Products
             <ChevronRight className="ml-2 h-4 w-4" />
           </Link>
