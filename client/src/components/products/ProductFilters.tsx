@@ -74,7 +74,7 @@ export function ProductFilters({
                 checked={selectedFilters.brand.includes(brand)}
                 onCheckedChange={(checked) => handleBrandChange(brand, checked as boolean)}
               />
-              <Label htmlFor={`brand-${brand}`} className="ml-2 text-sm text-gray-600 dark:text-gray-300">
+              <Label htmlFor={`brand-${brand}`} className="ml-2 text-sm text-gray-700 dark:text-gray-200">
                 {brand}
               </Label>
             </div>
@@ -96,7 +96,7 @@ export function ProductFilters({
             onValueCommit={handlePriceChangeEnd}
             className="my-6"
           />
-          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
+          <div className="flex justify-between text-sm text-gray-700 dark:text-gray-200">
             <span>{formatPrice(localPriceRange[0])}</span>
             <span>{formatPrice(localPriceRange[1])}</span>
           </div>

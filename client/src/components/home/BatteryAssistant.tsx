@@ -106,7 +106,7 @@ export default function BatteryAssistant() {
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-300 mb-1">Car Brand</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Car Brand</label>
                     <Select
                       value={carBrand}
                       onValueChange={setCarBrand}
@@ -257,11 +257,11 @@ export default function BatteryAssistant() {
                 </h3>
                 
                 {showCarResults && carResults.length === 0 && (
-                  <p className="text-gray-600 dark:text-gray-400">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
+                  <p className="text-gray-700 dark:text-gray-200">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
                 )}
                 
                 {showInverterResults && inverterResults.length === 0 && (
-                  <p className="text-gray-600 dark:text-gray-400">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
+                  <p className="text-gray-700 dark:text-gray-200">No compatible batteries found for your selection. Please try different criteria or contact us for assistance.</p>
                 )}
                 
                 {showCarResults && carResults.length > 0 && (
