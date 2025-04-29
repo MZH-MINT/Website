@@ -23,37 +23,65 @@ const ThemeProviderContext = React.createContext<ThemeProviderState>(initialStat
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "theme",
+  storageKey = "powermaster-theme",
   ...props
 }: ThemeProviderProps) {
+  // Check if we're in a browser environment to prevent SSR errors
+  const isBrowser = typeof window !== 'undefined';
+
   const [theme, setTheme] = React.useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => {
+      if (!isBrowser) return defaultTheme;
+      return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+    }
   );
 
+  // Handle system theme changes
   React.useEffect(() => {
-    const root = window.document.documentElement;
+    if (!isBrowser) return;
 
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    const handleChange = () => {
+      if (theme === "system") {
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(
+          mediaQuery.matches ? "dark" : "light"
+        );
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [theme, isBrowser]);
+
+  // Update theme class on document element
+  React.useEffect(() => {
+    if (!isBrowser) return;
+    
+    const root = window.document.documentElement;
     root.classList.remove("light", "dark");
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
-
       root.classList.add(systemTheme);
-      return;
+    } else {
+      root.classList.add(theme);
     }
+  }, [theme, isBrowser]);
 
-    root.classList.add(theme);
-  }, [theme]);
-
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
+  const value = React.useMemo(
+    () => ({
+      theme,
+      setTheme: (newTheme: Theme) => {
+        localStorage.setItem(storageKey, newTheme);
+        setTheme(newTheme);
+      },
+    }),
+    [theme, storageKey]
+  );
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
