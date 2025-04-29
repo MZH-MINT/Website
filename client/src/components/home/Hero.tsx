@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative overflow-hidden bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-10 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Power Solutions for Every Need
             </h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
               Premium car and inverter batteries with expert guidance, warranty, and doorstep delivery services.
             </p>
             <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
@@ -26,7 +26,7 @@ export default function Hero() {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-primary-800 text-primary-800 hover:bg-gray-50"
+                className="border-primary-800 text-primary-800 dark:border-primary-400 dark:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800"
                 asChild
               >
                 <Link href="/products/inverter">
@@ -47,7 +47,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="bg-primary-800 py-3 text-white relative overflow-hidden">
+      <div className="bg-primary-800 dark:bg-primary-900 py-3 text-white relative overflow-hidden">
         <div className="flex">
           <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
             <span className="mx-4 text-sm">✓ Premium Quality Batteries</span>

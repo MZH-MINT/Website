@@ -75,8 +75,8 @@ export default function AuthPage() {
       email: "",
       password: "",
       confirmPassword: "",
-      phone: "",
-      address: "",
+      phone: "",  // Use empty string instead of null
+      address: "", // Use empty string instead of null
     },
   });
 
@@ -261,7 +261,11 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Phone Number (Optional)</FormLabel>
                             <FormControl>
-                              <Input placeholder="+91 98765 43210" {...field} />
+                              <Input 
+                                placeholder="+91 98765 43210" 
+                                {...field} 
+                                value={field.value || ""}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -275,7 +279,11 @@ export default function AuthPage() {
                           <FormItem>
                             <FormLabel>Address (Optional)</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your delivery address" {...field} />
+                              <Input 
+                                placeholder="Your delivery address" 
+                                {...field} 
+                                value={field.value || ""}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
