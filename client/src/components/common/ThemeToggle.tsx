@@ -1,12 +1,6 @@
 import { useTheme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Moon, Sun, Laptop } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
@@ -22,34 +16,29 @@ export function ThemeToggle() {
     return null;
   }
 
+  // Toggle between light and dark mode only (simplify the UI)
+  const toggleTheme = () => {
+    if (theme === "dark") {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full w-8 h-8">
-          {theme === "light" ? (
-            <Sun className="h-4 w-4 text-yellow-500" />
-          ) : theme === "dark" ? (
-            <Moon className="h-4 w-4 text-blue-400" />
-          ) : (
-            <Laptop className="h-4 w-4 text-slate-500" />
-          )}
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")} className="cursor-pointer">
-          <Sun className="mr-2 h-4 w-4 text-yellow-500" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="cursor-pointer">
-          <Moon className="mr-2 h-4 w-4 text-blue-400" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="cursor-pointer">
-          <Laptop className="mr-2 h-4 w-4 text-slate-500" />
-          <span>System</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={toggleTheme}
+      className="rounded-full w-8 h-8"
+      aria-label="Toggle dark mode"
+    >
+      {theme === "dark" ? (
+        <Sun className="h-5 w-5 text-yellow-500" />
+      ) : (
+        <Moon className="h-5 w-5 text-blue-400" />
+      )}
+      <span className="sr-only">Toggle theme</span>
+    </Button>
   );
 }

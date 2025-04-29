@@ -52,7 +52,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Navigation */}
@@ -60,7 +60,7 @@ export default function Header() {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center">
                 <Zap className="h-6 w-6 text-yellow-400" />
-                <span className="text-primary-800 font-bold text-xl ml-2">PowerMaster</span>
+                <span className="text-foreground font-bold text-xl ml-2">PowerMaster</span>
               </Link>
             </div>
             <nav className="hidden sm:ml-6 sm:flex sm:space-x-8" aria-label="Main Navigation">
@@ -71,8 +71,8 @@ export default function Header() {
                   className={cn(
                     "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
                     isActive(link.href)
-                      ? "border-primary-500 text-gray-900"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      ? "border-primary text-foreground"
+                      : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
                   )}
                 >
                   {link.name}
@@ -87,7 +87,7 @@ export default function Header() {
             <ThemeToggle />
             
             {/* Search */}
-            <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
               <Search className="h-5 w-5" />
             </Button>
             
@@ -95,12 +95,12 @@ export default function Header() {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="text-gray-500 hover:text-gray-700 relative"
+              className="text-muted-foreground hover:text-foreground relative"
               onClick={() => navigate("/wishlist")}
             >
               <Heart className="h-5 w-5" />
               {user && (
-                <span className="absolute -top-1 -right-1 bg-primary-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
                   0
                 </span>
               )}
@@ -110,12 +110,12 @@ export default function Header() {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="text-gray-500 hover:text-gray-700 relative"
+              className="text-muted-foreground hover:text-foreground relative"
               onClick={() => navigate("/cart")}
             >
               <ShoppingCart className="h-5 w-5" />
               {user && (
-                <span className="absolute -top-1 -right-1 bg-primary-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full text-xs w-4 h-4 flex items-center justify-center">
                   0
                 </span>
               )}
@@ -125,7 +125,7 @@ export default function Header() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="flex text-sm rounded-full items-center space-x-1 text-gray-700 bg-gray-100 px-3 py-1 hover:bg-gray-200">
+                  <Button variant="outline" className="flex text-sm rounded-full items-center space-x-1 px-3 py-1">
                     <User className="h-4 w-4" />
                     <span className="font-medium">{user.name.split(' ')[0]}</span>
                   </Button>
@@ -155,7 +155,7 @@ export default function Header() {
             ) : (
               <Button 
                 variant="outline" 
-                className="flex text-sm rounded-full items-center space-x-1 text-gray-700 bg-gray-100 px-3 py-1 hover:bg-gray-200"
+                className="flex text-sm rounded-full items-center space-x-1 px-3 py-1"
                 onClick={() => navigate("/auth")}
               >
                 <User className="h-4 w-4" />
@@ -165,10 +165,12 @@ export default function Header() {
           </div>
           
           {/* Mobile menu button */}
-          <div className="flex items-center sm:hidden">
+          <div className="flex items-center sm:hidden space-x-2">
+            <ThemeToggle />
+            
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-gray-500">
+                <Button variant="ghost" size="icon" className="text-muted-foreground">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
@@ -176,7 +178,7 @@ export default function Header() {
                 <div className="py-4">
                   <div className="flex items-center mb-8">
                     <Zap className="h-6 w-6 text-yellow-400" />
-                    <span className="text-primary-800 font-bold text-xl ml-2">PowerMaster</span>
+                    <span className="text-foreground font-bold text-xl ml-2">PowerMaster</span>
                   </div>
                   
                   <div className="space-y-1">
@@ -187,8 +189,8 @@ export default function Header() {
                           className={cn(
                             "block px-3 py-2 rounded-md text-base font-medium",
                             isActive(link.href)
-                              ? "bg-primary-50 text-primary-700"
-                              : "text-gray-700 hover:bg-gray-100"
+                              ? "bg-primary/10 text-primary"
+                              : "text-foreground hover:bg-muted"
                           )}
                         >
                           {link.name}
@@ -197,16 +199,12 @@ export default function Header() {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-200 pt-4 mt-4">
+                  <div className="border-t border-border pt-4 mt-4">
                     <div className="space-y-3">
-                      <div className="px-3 py-2">
-                        <ThemeToggle />
-                      </div>
-                      
                       <SheetClose asChild>
                         <Link
                           href="/auth"
-                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-muted"
                         >
                           <User className="h-5 w-5 mr-2" />
                           <span>Account</span>
@@ -216,7 +214,7 @@ export default function Header() {
                       <SheetClose asChild>
                         <Link
                           href="/wishlist"
-                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-muted"
                         >
                           <Heart className="h-5 w-5 mr-2" />
                           <span>Wishlist</span>
@@ -226,7 +224,7 @@ export default function Header() {
                       <SheetClose asChild>
                         <Link
                           href="/cart"
-                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-muted"
                         >
                           <ShoppingCart className="h-5 w-5 mr-2" />
                           <span>Cart</span>
@@ -239,7 +237,7 @@ export default function Header() {
                             handleLogout();
                             setIsMobileMenuOpen(false);
                           }}
-                          className="flex w-full items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          className="flex w-full items-center px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-muted"
                         >
                           <LogOut className="h-5 w-5 mr-2" />
                           <span>Logout</span>
