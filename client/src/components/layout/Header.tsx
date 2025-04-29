@@ -3,17 +3,23 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  Search, 
-  Heart, 
-  ShoppingCart, 
-  User, 
-  Menu, 
-  LogOut, 
-  Zap,
-  UserCircle
-} from "lucide-react";
+import { Search, Heart, ShoppingCart, User, Menu, LogOut, Zap, UserCircle } from "lucide-react";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 function WishlistCount() {
   const { data: wishlistItems = [] } = useQuery<any[]>({
@@ -38,32 +44,6 @@ function CartCount() {
     </span>
   );
 }
-
-  Search, 
-  Heart, 
-  ShoppingCart, 
-  User, 
-  Menu, 
-  LogOut, 
-  Zap,
-  UserCircle
-} from "lucide-react";
-import { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [location, navigate] = useLocation();

@@ -121,7 +121,7 @@ export default function ProductsPage() {
                   )}
                 </div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{getPageTitle()}</h1>
-                <p className="text-gray-600 dark:text-gray-300 mt-1">
+                <p className="text-gray-700 dark:text-gray-200 mt-1">
                   {category === 'car' 
                     ? 'Premium car batteries with extended warranty and free installation'
                     : category === 'inverter'
@@ -219,7 +219,7 @@ export default function ProductsPage() {
                   {filteredProducts.length === 0 ? (
                     <div className="bg-white dark:bg-black rounded-lg shadow-sm p-10 text-center">
                       <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">No products found</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      <p className="text-gray-700 dark:text-gray-200 mb-6">
                         No products match your current filter criteria. Try adjusting your filters or browse our categories.
                       </p>
                       <Button onClick={handleClearFilters}>Clear Filters</Button>
@@ -227,7 +227,7 @@ export default function ProductsPage() {
                   ) : (
                     <>
                       <div className="flex justify-between items-center mb-6">
-                        <p className="text-gray-600 dark:text-gray-300">Showing {filteredProducts.length} products</p>
+                        <p className="text-gray-700 dark:text-gray-200">Showing {filteredProducts.length} products</p>
                       </div>
                       <ProductGrid products={filteredProducts} />
                     </>
