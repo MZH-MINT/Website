@@ -10,7 +10,7 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Power Solutions for Every Need
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            <p className="text-lg text-gray-700 dark:text-gray-200 mb-8">
               Premium car and inverter batteries with expert guidance, warranty, and doorstep delivery services.
             </p>
             <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
