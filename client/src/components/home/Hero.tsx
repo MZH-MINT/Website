@@ -56,9 +56,14 @@ export default function Hero() {
             <span className="mx-4 text-sm">✓ Free Battery Health Check</span>
             <span className="mx-4 text-sm">✓ Same Day Delivery</span>
             <span className="mx-4 text-sm">✓ 24/7 Support</span>
+          </div>
+          <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
             <span className="mx-4 text-sm">✓ Premium Quality Batteries</span>
             <span className="mx-4 text-sm">✓ 24-Month Warranty</span>
             <span className="mx-4 text-sm">✓ Free Installation</span>
+            <span className="mx-4 text-sm">✓ Free Battery Health Check</span>
+            <span className="mx-4 text-sm">✓ Same Day Delivery</span>
+            <span className="mx-4 text-sm">✓ 24/7 Support</span>
           </div>
         </div>
       </div>
