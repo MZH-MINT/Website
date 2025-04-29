@@ -100,8 +100,8 @@ export default function BatteryAssistant() {
               {/* Car Battery Selector */}
               <div className="flex-1 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center mb-4">
-                  <Car className="h-6 w-6 text-primary-700 mr-3" />
-                  <h3 className="text-xl font-semibold">Find Car Battery</h3>
+                  <Car className="h-6 w-6 text-primary-700 dark:text-primary-500 mr-3" />
+                  <h3 className="text-xl font-semibold dark:text-white">Find Car Battery</h3>
                 </div>
                 
                 <div className="space-y-4">
@@ -178,8 +178,8 @@ export default function BatteryAssistant() {
               {/* Inverter Battery Selector */}
               <div className="flex-1 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center mb-4">
-                  <Zap className="h-6 w-6 text-primary-700 mr-3" />
-                  <h3 className="text-xl font-semibold">Find Inverter Battery</h3>
+                  <Zap className="h-6 w-6 text-primary-700 dark:text-primary-500 mr-3" />
+                  <h3 className="text-xl font-semibold dark:text-white">Find Inverter Battery</h3>
                 </div>
                 
                 <div className="space-y-4">
@@ -251,8 +251,8 @@ export default function BatteryAssistant() {
             
             {/* Results display */}
             {(showCarResults || showInverterResults) && (
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h3 className="text-xl font-semibold mb-4">
+              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl font-semibold mb-4 dark:text-white">
                   {showCarResults ? "Compatible Car Batteries" : "Compatible Inverter Batteries"}
                 </h3>
                 
@@ -274,15 +274,15 @@ export default function BatteryAssistant() {
               </div>
             )}
             
-            <div className="mt-8 pt-8 border-t border-gray-200">
+            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                    <CalendarCheck className="h-6 w-6 text-green-600" />
+                  <div className="flex-shrink-0 h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                    <CalendarCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Schedule a Free Battery Health Check</h3>
-                    <p className="text-gray-600">Our experts will check your battery's health and provide recommendations</p>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">Schedule a Free Battery Health Check</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Our experts will check your battery's health and provide recommendations</p>
                   </div>
                 </div>
                 <Button 
