@@ -47,23 +47,23 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="bg-primary-800 dark:bg-black py-3 text-white relative overflow-hidden">
+      <div className="bg-primary-700 py-3 relative overflow-hidden">
         <div className="flex">
           <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
-            <span className="mx-4 text-sm text-white">✓ Premium Quality Batteries</span>
-            <span className="mx-4 text-sm text-white">✓ 24-Month Warranty</span>
-            <span className="mx-4 text-sm text-white">✓ Free Installation</span>
-            <span className="mx-4 text-sm text-white">✓ Free Battery Health Check</span>
-            <span className="mx-4 text-sm text-white">✓ Same Day Delivery</span>
-            <span className="mx-4 text-sm text-white">✓ 24/7 Support</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Premium Quality Batteries</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ 24-Month Warranty</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Free Installation</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Free Battery Health Check</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Same Day Delivery</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ 24/7 Support</span>
           </div>
           <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
-            <span className="mx-4 text-sm text-white">✓ Premium Quality Batteries</span>
-            <span className="mx-4 text-sm text-white">✓ 24-Month Warranty</span>
-            <span className="mx-4 text-sm text-white">✓ Free Installation</span>
-            <span className="mx-4 text-sm text-white">✓ Free Battery Health Check</span>
-            <span className="mx-4 text-sm text-white">✓ Same Day Delivery</span>
-            <span className="mx-4 text-sm text-white">✓ 24/7 Support</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Premium Quality Batteries</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ 24-Month Warranty</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Free Installation</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Free Battery Health Check</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ Same Day Delivery</span>
+            <span className="mx-4 text-sm font-medium text-white">✓ 24/7 Support</span>
           </div>
         </div>
       </div>
