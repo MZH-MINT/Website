@@ -57,11 +57,11 @@ export default function Footer() {
           <div>
             <h3 className="text-foreground font-semibold text-lg mb-4">My Account</h3>
             <ul className="space-y-2">
-              <li><Link href="/auth" className="hover:text-foreground transition-colors">Sign In / Register</Link></li>
-              <li><Link href="/profile" className="hover:text-foreground transition-colors">My Orders</Link></li>
-              <li><Link href="/wishlist" className="hover:text-foreground transition-colors">Wishlist</Link></li>
-              <li><Link href="/cart" className="hover:text-foreground transition-colors">Shopping Cart</Link></li>
-              <li><Link href="/profile" className="hover:text-foreground transition-colors">Profile Settings</Link></li>
+              <li><Link href="/auth" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Sign In / Register</Link></li>
+              <li><Link href="/profile" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>My Orders</Link></li>
+              <li><Link href="/wishlist" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Wishlist</Link></li>
+              <li><Link href="/cart" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Shopping Cart</Link></li>
+              <li><Link href="/profile" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Profile Settings</Link></li>
             </ul>
           </div>
           
