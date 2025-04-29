@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
@@ -120,7 +118,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <>
-        <Header />
+        
         <main className="py-10 bg-gray-50 min-h-[calc(100vh-240px)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center">
@@ -128,7 +126,7 @@ export default function ProfilePage() {
             </div>
           </div>
         </main>
-        <Footer />
+        
       </>
     );
   }
@@ -139,7 +137,7 @@ export default function ProfilePage() {
         <title>Your Profile - PowerMaster Enterprises</title>
         <meta name="description" content="Manage your profile and view your order history" />
       </Helmet>
-      <Header />
+      
       <main className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -480,7 +478,7 @@ export default function ProfilePage() {
           </div>
         </div>
       </main>
-      <Footer />
+      
     </>
   );
 }

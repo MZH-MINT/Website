@@ -1,7 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Trash2, Loader2, ArrowRight } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -101,7 +99,7 @@ export default function WishlistPage() {
           <title>Your Wishlist - PowerMaster Enterprises</title>
           <meta name="description" content="View and manage your saved products" />
         </Helmet>
-        <Header />
+        
         <main className="py-10 bg-gray-50 min-h-[calc(100vh-240px)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-lg shadow-sm p-8 text-center max-w-xl mx-auto">
@@ -121,7 +119,7 @@ export default function WishlistPage() {
             </div>
           </div>
         </main>
-        <Footer />
+        
       </>
     );
   }
@@ -132,7 +130,7 @@ export default function WishlistPage() {
         <title>Your Wishlist - PowerMaster Enterprises</title>
         <meta name="description" content="View and manage your saved products" />
       </Helmet>
-      <Header />
+      
       <main className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Your Wishlist</h1>
@@ -203,7 +201,7 @@ export default function WishlistPage() {
           )}
         </div>
       </main>
-      <Footer />
+      
     </>
   );
 }

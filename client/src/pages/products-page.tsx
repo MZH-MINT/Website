@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useParams } from "wouter";
 import { useState, useEffect } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { Product } from "@shared/schema";
@@ -104,7 +102,7 @@ export default function ProductsPage() {
         <title>{getPageTitle()} - PowerMaster Enterprises</title>
         <meta name="description" content={`Browse our selection of premium ${getPageTitle().toLowerCase()} with warranty and doorstep delivery services.`} />
       </Helmet>
-      <Header />
+      
       <main className="bg-gray-50 min-h-screen">
         {/* Page Header */}
         <div className="bg-white shadow">
@@ -240,7 +238,7 @@ export default function ProductsPage() {
           </div>
         </div>
       </main>
-      <Footer />
+      
     </>
   );
 }

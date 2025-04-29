@@ -1,8 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams, useLocation } from "wouter";
 import { useState } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
@@ -139,7 +137,7 @@ export default function ProductDetailPage() {
   if (isLoading) {
     return (
       <>
-        <Header />
+        
         <main className="py-10 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
@@ -147,7 +145,7 @@ export default function ProductDetailPage() {
             </div>
           </div>
         </main>
-        <Footer />
+        
       </>
     );
   }
@@ -156,7 +154,7 @@ export default function ProductDetailPage() {
   if (error || !product) {
     return (
       <>
-        <Header />
+        
         <main className="py-10 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -169,7 +167,7 @@ export default function ProductDetailPage() {
             </div>
           </div>
         </main>
-        <Footer />
+        
       </>
     );
   }
@@ -180,7 +178,7 @@ export default function ProductDetailPage() {
         <title>{product.name} - PowerMaster Enterprises</title>
         <meta name="description" content={product.description.slice(0, 160)} />
       </Helmet>
-      <Header />
+      
       <main className="py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
@@ -425,7 +423,7 @@ export default function ProductDetailPage() {
           )}
         </div>
       </main>
-      <Footer />
+      
     </>
   );
 }
