@@ -103,25 +103,25 @@ export default function ProductsPage() {
         <meta name="description" content={`Browse our selection of premium ${getPageTitle().toLowerCase()} with warranty and doorstep delivery services.`} />
       </Helmet>
       
-      <main className="bg-gray-50 min-h-screen">
+      <main className="bg-gray-50 dark:bg-black min-h-screen">
         {/* Page Header */}
-        <div className="bg-white shadow">
+        <div className="bg-white dark:bg-black shadow">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                  <a href="/" className="hover:text-primary-700">Home</a>
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                  <a href="/" className="hover:text-primary-700 dark:hover:text-primary-400">Home</a>
                   <ChevronRight className="h-4 w-4" />
-                  <span className="font-medium text-gray-900">Products</span>
+                  <span className="font-medium text-gray-900 dark:text-white">Products</span>
                   {category !== 'all' && (
                     <>
                       <ChevronRight className="h-4 w-4" />
-                      <span className="font-medium text-gray-900 capitalize">{category}</span>
+                      <span className="font-medium text-gray-900 dark:text-white capitalize">{category}</span>
                     </>
                   )}
                 </div>
-                <h1 className="text-3xl font-bold text-gray-900">{getPageTitle()}</h1>
-                <p className="text-gray-600 mt-1">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{getPageTitle()}</h1>
+                <p className="text-gray-600 dark:text-gray-300 mt-1">
                   {category === 'car' 
                     ? 'Premium car batteries with extended warranty and free installation'
                     : category === 'inverter'
@@ -187,8 +187,8 @@ export default function ProductsPage() {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Desktop Filters Sidebar */}
             <div className="hidden md:block w-64 flex-shrink-0">
-              <div className="bg-white p-6 rounded-lg shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold mb-6">Filters</h3>
+              <div className="bg-white dark:bg-black p-6 rounded-lg shadow-sm sticky top-24">
+                <h3 className="text-lg font-semibold mb-6 dark:text-white">Filters</h3>
                 <ProductFilters
                   brands={allBrands}
                   priceRange={priceRange}

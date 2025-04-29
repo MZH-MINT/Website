@@ -174,8 +174,8 @@ export default function AuthPage() {
                 {/* Register Form */}
                 <TabsContent value="register">
                   <div className="mb-4">
-                    <h2 className="text-xl font-semibold text-gray-900">Create an Account</h2>
-                    <p className="text-gray-600">Join PowerMaster for exclusive offers</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Create an Account</h2>
+                    <p className="text-gray-600 dark:text-gray-300">Join PowerMaster for exclusive offers</p>
                   </div>
                   
                   <Form {...registerForm}>
