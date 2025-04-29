@@ -35,7 +35,7 @@ export default function Benefits() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
             <div className="text-center" key={index}>
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-700 mb-4">
+              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 mb-4">
                 {benefit.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2 dark:text-white">{benefit.title}</h3>
@@ -67,7 +67,7 @@ export default function Benefits() {
                   </svg>
                 ))}
               </div>
-              <blockquote className="text-xl italic text-gray-800 dark:text-gray-200 mb-4">
+              <blockquote className="text-xl italic text-gray-900 dark:text-white mb-4">
                 "PowerMaster provided exceptional service when my car wouldn't start. Their expert came, diagnosed the issue, and replaced my battery within hours. The new battery works perfectly and came with a solid warranty."
               </blockquote>
               <div className="flex items-center">
