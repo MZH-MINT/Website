@@ -205,13 +205,13 @@ export default function CartPage() {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
                 {isLoading ? (
                   <div className="p-8 text-center">
-                    <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary-600 mb-4" />
-                    <p className="text-gray-600">Loading your cart...</p>
+                    <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary-600 dark:text-primary-400 mb-4" />
+                    <p className="text-gray-600 dark:text-gray-300">Loading your cart...</p>
                   </div>
                 ) : (
                   <>
-                    <div className="p-6 border-b border-gray-200">
-                      <h2 className="text-xl font-semibold text-gray-900">Items ({cartItems.length})</h2>
+                    <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Items ({cartItems.length})</h2>
                     </div>
                     <ul>
                       {cartItems.map((item) => (
@@ -241,17 +241,17 @@ export default function CartPage() {
                     <span>Subtotal</span>
                     <span>₹{subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
+                  <div className="flex justify-between text-gray-600 dark:text-gray-300">
                     <span>Delivery Charge</span>
                     <span>
                       {deliveryCharge === 0 ? (
-                        <span className="text-green-600">Free</span>
+                        <span className="text-green-600 dark:text-green-400">Free</span>
                       ) : (
                         `₹${deliveryCharge.toLocaleString()}`
                       )}
                     </span>
                   </div>
-                  <div className="border-t border-gray-200 pt-4 flex justify-between font-semibold text-lg">
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4 flex justify-between font-semibold text-lg text-gray-900 dark:text-white">
                     <span>Total</span>
                     <span>₹{total.toLocaleString()}</span>
                   </div>
