@@ -46,8 +46,8 @@ export default function Footer() {
           <div>
             <h3 className="text-foreground font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/products/car" className="hover:text-foreground transition-colors">Car Batteries</Link></li>
-              <li><Link href="/products/inverter" className="hover:text-foreground transition-colors">Inverter Batteries</Link></li>
+              <li><Link href="/products/car" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo(0, 0)}>Car Batteries</Link></li>
+              <li><Link href="/products/inverter" className="hover:text-foreground transition-colors" onClick={() => window.scrollTo(0, 0)}>Inverter Batteries</Link></li>
               <li><Link href="/#battery-assistant" className="hover:text-foreground transition-colors">Battery Finder</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors">Battery Maintenance Tips</Link></li>
             </ul>
@@ -78,6 +78,20 @@ export default function Footer() {
         </div>
         
         
+      </div>
+      
+      {/* Google Maps Embed */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 flex justify-center">
+        <iframe
+          title="PowerMaster Enterprises Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.0000000000005!2d80.23400000000001!3d13.0827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xaef599ba358ca6a7!2sPowerMaster%20Enterprises!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+          width="100%"
+          height="250"
+          style={{ border: 0, borderRadius: '12px', minWidth: '300px', maxWidth: '600px' }}
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
       
       {/* Copyright */}

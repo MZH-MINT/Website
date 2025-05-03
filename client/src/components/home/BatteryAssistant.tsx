@@ -47,11 +47,11 @@ export default function BatteryAssistant() {
   };
   
   const handleWhatsAppSchedule = () => {
-    toast({
-      title: "WhatsApp Service",
-      description: "This feature will connect you to our WhatsApp service for scheduling a free battery health check.",
-    });
-    // In a real implementation, this would open WhatsApp with a pre-filled message
+    window.open(
+      'https://wa.me/917010511894?text=I%20would%20like%20to%20schedule%20a%20free%20battery%20health%20check',
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
   
   // Car battery compatibility search
@@ -167,8 +167,7 @@ export default function BatteryAssistant() {
                   
                   <Button 
                     onClick={handleCarSearch}
-                    className="w-full bg-primary-700 hover:bg-primary-800"
-                    disabled={fetchCarBatteries.isFetching}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold"
                   >
                     {fetchCarBatteries.isFetching ? "Searching..." : "Find Compatible Batteries"}
                   </Button>
@@ -240,8 +239,7 @@ export default function BatteryAssistant() {
                   
                   <Button 
                     onClick={handleInverterSearch}
-                    className="w-full bg-primary-700 hover:bg-primary-800"
-                    disabled={fetchInverterBatteries.isFetching}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold"
                   >
                     {fetchInverterBatteries.isFetching ? "Searching..." : "Find Compatible Batteries"}
                   </Button>

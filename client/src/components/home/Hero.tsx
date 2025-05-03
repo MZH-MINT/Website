@@ -2,6 +2,15 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
+  const marqueeItems = [
+    "✓ Premium Quality Batteries",
+    "✓ 24-Month Warranty",
+    "✓ Free Installation",
+    "✓ Free Battery Health Check",
+    "✓ Same Day Delivery",
+    "✓ 24/7 Support",
+  ];
+
   return (
     <section className="relative overflow-hidden bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +25,7 @@ export default function Hero() {
             <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
               <Button 
                 size="lg"
-                className="bg-primary-800 hover:bg-primary-700 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
                 asChild
               >
                 <Link href="/products/car">
@@ -47,23 +56,17 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="bg-primary-700 py-3 relative overflow-hidden">
-        <div className="flex">
-          <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
-            <span className="mx-4 text-sm font-medium text-white">✓ Premium Quality Batteries</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ 24-Month Warranty</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Free Installation</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Free Battery Health Check</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Same Day Delivery</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ 24/7 Support</span>
+      <div className="bg-blue-700 py-3 relative overflow-hidden">
+        <div className="flex w-full">
+          <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap min-w-full">
+            {marqueeItems.map((item, idx) => (
+              <span key={idx} className="text-sm font-medium text-white px-4 first:pl-0 last:pr-0">{item}</span>
+            ))}
           </div>
-          <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap">
-            <span className="mx-4 text-sm font-medium text-white">✓ Premium Quality Batteries</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ 24-Month Warranty</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Free Installation</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Free Battery Health Check</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ Same Day Delivery</span>
-            <span className="mx-4 text-sm font-medium text-white">✓ 24/7 Support</span>
+          <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap min-w-full" aria-hidden="true">
+            {marqueeItems.map((item, idx) => (
+              <span key={idx} className="text-sm font-medium text-white px-4 first:pl-0 last:pr-0">{item}</span>
+            ))}
           </div>
         </div>
       </div>

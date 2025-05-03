@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Product } from "@shared/schema";
 import { Button } from "@/components/ui/button";
@@ -38,11 +38,23 @@ export function ProductCard({ product }: ProductCardProps) {
   // Check if this product is in the wishlist
   const isWishlisted = wishlistItems.some((item) => item.productId === product.id);
   
+  // Optimistic UI state for wishlist
+  const [optimisticWishlisted, setOptimisticWishlisted] = useState(isWishlisted);
+  useEffect(() => {
+    setOptimisticWishlisted(isWishlisted);
+  }, [isWishlisted]);
+  
+  // Optimistic UI state for cart
+  const [optimisticCartQuantity, setOptimisticCartQuantity] = useState(cartItem ? cartItem.quantity : 0);
+  useEffect(() => {
+    setOptimisticCartQuantity(cartItem ? cartItem.quantity : 0);
+  }, [cartItem]);
+  
   // Add to cart mutation
   const addToCartMutation = useMutation({
     mutationFn: async () => {
       if (!user) {
-        navigate("/auth");
+        navigate("/auth", { replace: true });
         return null;
       }
       
@@ -116,7 +128,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const addToWishlistMutation = useMutation({
     mutationFn: async () => {
       if (!user) {
-        navigate("/auth");
+        navigate("/auth", { replace: true });
         return null;
       }
       
@@ -139,6 +151,34 @@ export function ProductCard({ product }: ProductCardProps) {
     onError: (error: Error) => {
       toast({
         title: "Failed to add to wishlist",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+  
+  // Remove from wishlist mutation
+  const removeFromWishlistMutation = useMutation({
+    mutationFn: async () => {
+      if (!user) {
+        navigate("/auth", { replace: true });
+        return null;
+      }
+      // Find the wishlist item for this product
+      const wishlistItem = wishlistItems.find((item) => item.productId === product.id);
+      if (!wishlistItem) return null;
+      await apiRequest("DELETE", `/api/wishlist/${wishlistItem.id}`);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Removed from wishlist",
+        description: "Product has been removed from your wishlist",
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/wishlist"] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Failed to remove from wishlist",
         description: error.message,
         variant: "destructive",
       });
@@ -178,14 +218,26 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             variant="outline"
             size="icon"
-            className={`h-8 w-8 rounded-full bg-white dark:bg-gray-800 shadow-sm ${isWishlisted ? 'text-red-500' : ''}`}
-            onClick={() => addToWishlistMutation.mutate()}
-            disabled={addToWishlistMutation.isPending}
+            className={`h-8 w-8 rounded-full bg-white dark:bg-gray-800 shadow-sm ${optimisticWishlisted ? 'text-red-500' : ''}`}
+            onClick={() => {
+              if (!user) {
+                navigate("/auth", { replace: true });
+                return;
+              }
+              if (optimisticWishlisted) {
+                setOptimisticWishlisted(false);
+                removeFromWishlistMutation.mutate();
+              } else {
+                setOptimisticWishlisted(true);
+                addToWishlistMutation.mutate();
+              }
+            }}
+            disabled={addToWishlistMutation.isPending || removeFromWishlistMutation.isPending}
           >
-            {addToWishlistMutation.isPending ? (
+            {(addToWishlistMutation.isPending || removeFromWishlistMutation.isPending) ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+              <Heart className={`h-4 w-4 ${optimisticWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
             )}
           </Button>
         </div>
@@ -232,7 +284,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
       
       <CardFooter className="px-4 pb-4 pt-0">
-        {cartItem ? (
+        {optimisticCartQuantity > 0 ? (
           // Show quantity controls if product is in cart
           <div className="flex items-center justify-between w-full border border-input rounded-md overflow-hidden">
             <Button 
@@ -240,12 +292,18 @@ export function ProductCard({ product }: ProductCardProps) {
               size="icon"
               className="rounded-none h-10 px-3"
               onClick={() => {
-                if (cartItem.quantity === 1) {
+                if (!user) {
+                  navigate("/auth", { replace: true });
+                  return;
+                }
+                if (optimisticCartQuantity === 1) {
+                  setOptimisticCartQuantity(0);
                   removeFromCartMutation.mutate(cartItem.id);
                 } else {
+                  setOptimisticCartQuantity(optimisticCartQuantity - 1);
                   updateCartMutation.mutate({ 
                     id: cartItem.id, 
-                    quantity: cartItem.quantity - 1 
+                    quantity: optimisticCartQuantity - 1 
                   });
                 }
               }}
@@ -258,7 +316,7 @@ export function ProductCard({ product }: ProductCardProps) {
               {updateCartMutation.isPending ? (
                 <Loader2 className="h-4 w-4 animate-spin mx-auto" />
               ) : (
-                cartItem.quantity
+                optimisticCartQuantity
               )}
             </span>
             
@@ -267,12 +325,17 @@ export function ProductCard({ product }: ProductCardProps) {
               size="icon"
               className="rounded-none h-10 px-3"
               onClick={() => {
+                if (!user) {
+                  navigate("/auth", { replace: true });
+                  return;
+                }
+                setOptimisticCartQuantity(optimisticCartQuantity + 1);
                 updateCartMutation.mutate({ 
                   id: cartItem.id, 
-                  quantity: cartItem.quantity + 1 
+                  quantity: optimisticCartQuantity + 1 
                 });
               }}
-              disabled={updateCartMutation.isPending || product.stock <= cartItem.quantity}
+              disabled={updateCartMutation.isPending || product.stock <= optimisticCartQuantity}
             >
               <Plus className="h-4 w-4" />
             </Button>
@@ -281,7 +344,14 @@ export function ProductCard({ product }: ProductCardProps) {
           // Show Add to Cart button if product is not in cart
           <Button 
             className="w-full"
-            onClick={() => addToCartMutation.mutate()}
+            onClick={() => {
+              if (!user) {
+                navigate("/auth", { replace: true });
+                return;
+              }
+              setOptimisticCartQuantity(1);
+              addToCartMutation.mutate();
+            }}
             disabled={addToCartMutation.isPending || product.stock === 0}
           >
             {addToCartMutation.isPending ? (

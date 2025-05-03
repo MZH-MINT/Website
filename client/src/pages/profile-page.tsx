@@ -143,11 +143,11 @@ export default function ProfilePage() {
                 <div className="p-6 bg-primary-700 dark:bg-primary-800 text-white dark:text-gray-100">
                   <div className="flex items-center space-x-3">
                     <div className="h-12 w-12 rounded-full bg-white/20 dark:bg-gray-700/20 flex items-center justify-center">
-                      <UserIcon className="h-6 w-6" />
+                      <UserIcon className="h-6 w-6 text-gray-500 dark:text-gray-300" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold">{user.name}</h2>
-                      <p className="text-sm text-white/80 dark:text-gray-200">{user.email}</p>
+                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</h2>
+                      <p className="text-sm text-gray-600 dark:text-gray-200">{user.email}</p>
                     </div>
                   </div>
                 </div>
@@ -357,42 +357,10 @@ export default function ProfilePage() {
                   <div className="p-6">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Account Settings</h1>
 
-                    <Tabs defaultValue="preferences">
+                    <Tabs defaultValue="password">
                       <TabsList className="mb-6">
-                        <TabsTrigger value="preferences">Preferences</TabsTrigger>
                         <TabsTrigger value="password">Password</TabsTrigger>
-                        <TabsTrigger value="notifications">Notifications</TabsTrigger>
                       </TabsList>
-
-                      <TabsContent value="preferences">
-                        <Card className="dark:bg-gray-800">
-                          <CardHeader>
-                            <CardTitle className="text-gray-900 dark:text-gray-100">Language Preferences</CardTitle>
-                            <CardDescription className="text-gray-500 dark:text-gray-400">Manage your preferred language settings</CardDescription>
-                          </CardHeader>
-                          <CardContent className="dark:text-gray-200">
-                            <div className="space-y-4">
-                              <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                  Display Language
-                                </label>
-                                <Select defaultValue={user.language}>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select language" className="dark:bg-gray-700 dark:text-gray-200" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="en">English</SelectItem>
-                                    <SelectItem value="hi">Hindi</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              </div>
-                            </div>
-                          </CardContent>
-                          <CardFooter>
-                            <Button className="bg-primary-700 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500">Save Preferences</Button>
-                          </CardFooter>
-                        </Card>
-                      </TabsContent>
 
                       <TabsContent value="password">
                         <Card className="dark:bg-gray-800">
@@ -423,22 +391,8 @@ export default function ProfilePage() {
                             </div>
                           </CardContent>
                           <CardFooter>
-                            <Button className="bg-primary-700 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500">Update Password</Button>
+                            <Button className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-primary-600 dark:hover:bg-primary-500">Update Password</Button>
                           </CardFooter>
-                        </Card>
-                      </TabsContent>
-
-                      <TabsContent value="notifications">
-                        <Card className="dark:bg-gray-800">
-                          <CardHeader>
-                            <CardTitle className="text-gray-900 dark:text-gray-100">Notification Settings</CardTitle>
-                            <CardDescription className="text-gray-500 dark:text-gray-400">Manage how we communicate with you</CardDescription>
-                          </CardHeader>
-                          <CardContent className="dark:text-gray-200">
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                              Notification settings will be available in a future update.
-                            </p>
-                          </CardContent>
                         </Card>
                       </TabsContent>
                     </Tabs>

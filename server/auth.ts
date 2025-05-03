@@ -6,10 +6,13 @@ import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
+import { pool } from "./db";
 
 declare global {
   namespace Express {
-    interface User extends SelectUser {}
+    interface User extends SelectUser {
+      isAdmin?: boolean;
+    }
   }
 }
 
@@ -56,10 +59,61 @@ export function setupAuth(app: Express) {
     }),
   );
 
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser(async (id: number, done) => {
-    const user = await storage.getUser(id);
-    done(null, user);
+  passport.use(
+    "admin-local",
+    new LocalStrategy(
+      {
+        usernameField: "userId",
+        passwordField: "password",
+      },
+      async (userId: string, password: string, done: (error: any, user?: any, info?: any) => void) => {
+        try {
+          const result = await pool.query(
+            "SELECT * FROM admins WHERE user_id = $1 AND password_hash = $2",
+            [userId, password]
+          );
+          const admin = result.rows[0];
+          if (!admin) {
+            return done(null, false, { message: "Invalid credentials" });
+          }
+          // Mark as admin and remove password
+          const { password_hash, ...adminWithoutPassword } = admin;
+          return done(null, { ...adminWithoutPassword, isAdmin: true });
+        } catch (err) {
+          return done(err);
+        }
+      }
+    )
+  );
+
+  passport.serializeUser((user: any, done) => {
+    done(null, { id: user.id, isAdmin: user.isAdmin });
+  });
+
+  passport.deserializeUser(async (obj: any, done) => {
+    try {
+      if (obj.isAdmin) {
+        // Admin
+        const result = await pool.query("SELECT * FROM admins WHERE id = $1", [obj.id]);
+        const admin = result.rows[0];
+        if (admin) {
+          const { password_hash, ...adminWithoutPassword } = admin;
+          done(null, { ...adminWithoutPassword, isAdmin: true });
+        } else {
+          done(null, false);
+        }
+      } else {
+        // Regular user
+        const user = await storage.getUser(obj.id);
+        if (user) {
+          done(null, user);
+        } else {
+          done(null, false);
+        }
+      }
+    } catch (err) {
+      done(err);
+    }
   });
 
   app.post("/api/register", async (req, res, next) => {

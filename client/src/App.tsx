@@ -12,6 +12,7 @@ import ProfilePage from "@/pages/profile-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AdminLogin from "@/pages/admin-login";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
       <ProtectedRoute path="/cart" component={CartPage} />
       <ProtectedRoute path="/wishlist" component={WishlistPage} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
+      <Route path="/admin-login" component={AdminLogin} />
       <Route component={NotFound} />
     </Switch>
   );

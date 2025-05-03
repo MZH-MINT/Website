@@ -16,7 +16,7 @@ export default function HomePage() {
       <div>
         <Hero />
         <BatteryAssistant />
-        <ProductCategories />
+        {/* <ProductCategories /> */}
         <FeaturedProducts />
         <Benefits />
         <CTA />

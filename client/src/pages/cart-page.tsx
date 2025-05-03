@@ -282,7 +282,7 @@ export default function CartPage() {
                       
                       <Button 
                         type="submit"
-                        className="w-full bg-primary-700 hover:bg-primary-600"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold"
                         disabled={placeOrderMutation.isPending || cartItems.length === 0}
                       >
                         {placeOrderMutation.isPending ? (

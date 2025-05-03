@@ -10,10 +10,85 @@ import {
   insertOrderSchema,
   insertOrderItemSchema
 } from "@shared/schema";
+import bcrypt from "bcrypt";
+import { pool } from "./db";
+import 'express-session';
+import passport from "passport";
 
+declare module 'express-session' {
+  interface SessionData {
+    adminId?: number;
+  }
+}
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup auth routes
   setupAuth(app);
+
+  // Create admin user if none exists
+  app.post("/api/admin/create", async (req, res) => {
+    try {
+      const { userId, password } = req.body;
+      console.log('Creating admin user:', { userId });
+
+      // Check if admin already exists
+      const existingAdmin = await pool.query('SELECT * FROM admins WHERE user_id = $1', [userId]);
+      if (existingAdmin.rows.length > 0) {
+        return res.status(400).json({ message: 'Admin user already exists' });
+      }
+
+      // Create new admin
+      const result = await pool.query(
+        'INSERT INTO admins (user_id, password_hash) VALUES ($1, $2) RETURNING *',
+        [userId, password]
+      );
+      
+      console.log('Admin created:', result.rows[0]);
+      res.status(201).json({ message: 'Admin user created successfully' });
+    } catch (error: any) {
+      console.error('Create admin error:', error);
+      res.status(500).json({ message: 'Server error', error: error?.message || 'Unknown error' });
+    }
+  });
+
+  // Admin login route
+  app.post("/api/admin/login", (req, res, next) => {
+    passport.authenticate("admin-local", (err: Error, admin: any, info: any) => {
+      if (err) {
+        console.error("Admin login error:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      if (!admin) {
+        return res.status(401).json({ error: info?.message || "Invalid credentials" });
+      }
+      req.logIn(admin, (err) => {
+        if (err) {
+          console.error("Session error:", err);
+          return res.status(500).json({ error: "Session error" });
+        }
+        return res.json({ message: "Login successful", admin });
+      });
+    })(req, res, next);
+  });
+
+  // Admin check route
+  app.get("/api/admin/check", (req, res) => {
+    if (req.isAuthenticated() && req.user?.isAdmin) {
+      res.json({ isAdmin: true, admin: req.user });
+    } else {
+      res.json({ isAdmin: false });
+    }
+  });
+
+  // Admin logout route
+  app.post("/api/admin/logout", (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        console.error("Logout error:", err);
+        return res.status(500).json({ error: "Logout failed" });
+      }
+      res.json({ message: "Logged out successfully" });
+    });
+  });
 
   // Products routes
   app.get("/api/products", (req, res, next) => {
@@ -242,24 +317,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       .catch(next);
   });
   
-  app.get("/api/orders/:id/items", (req, res, next) => {
+  app.get("/api/orders/:id/items", async (req, res, next) => {
     if (!req.isAuthenticated()) return res.sendStatus(401);
-    
+  
     const id = parseInt(req.params.id);
     if (isNaN(id)) return res.status(400).json({ message: "Invalid order ID" });
-    
-    storage.getOrderById(id)
-      .then(order => {
-        if (!order) return res.status(404).json({ message: "Order not found" });
-        if (order.userId !== req.user!.id) return res.status(403).json({ message: "Unauthorized" });
-        
-        return storage.getOrderItems(id);
-      })
-      .then(items => {
-        if (!items) return;
-        res.json(items);
-      })
-      .catch(next);
+  
+    try {
+      const order = await storage.getOrderById(id);
+      if (!order) return res.status(404).json({ message: "Order not found" });
+      if (order.userId !== req.user!.id) return res.status(403).json({ message: "Unauthorized" });
+  
+      const items = await storage.getOrderItems(id);
+      res.json(items);
+    } catch (err) {
+      next(err);
+    }
   });
   
   app.post("/api/orders", (req, res, next) => {
