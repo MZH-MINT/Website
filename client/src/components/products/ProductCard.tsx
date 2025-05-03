@@ -29,6 +29,15 @@ export function ProductCard({ product }: ProductCardProps) {
   // Find this product in cart
   const cartItem = cartItems.find(item => item.productId === product.id);
   
+  // Fetch wishlist items for the user
+  const { data: wishlistItems = [] } = useQuery<any[]>({
+    queryKey: ["/api/wishlist"],
+    enabled: !!user,
+  });
+
+  // Check if this product is in the wishlist
+  const isWishlisted = wishlistItems.some((item) => item.productId === product.id);
+  
   // Add to cart mutation
   const addToCartMutation = useMutation({
     mutationFn: async () => {
@@ -169,14 +178,14 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 rounded-full bg-white dark:bg-gray-800 shadow-sm"
+            className={`h-8 w-8 rounded-full bg-white dark:bg-gray-800 shadow-sm ${isWishlisted ? 'text-red-500' : ''}`}
             onClick={() => addToWishlistMutation.mutate()}
             disabled={addToWishlistMutation.isPending}
           >
             {addToWishlistMutation.isPending ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <Heart className="h-4 w-4" />
+              <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
             )}
           </Button>
         </div>

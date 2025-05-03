@@ -40,6 +40,15 @@ export default function ProductDetailPage() {
     select: (data) => data.filter(p => p.id !== Number(id)).slice(0, 4),
   });
   
+  // Fetch wishlist items for the user
+  const { data: wishlistItems = [] } = useQuery<any[]>({
+    queryKey: ["/api/wishlist"],
+    enabled: !!user,
+  });
+
+  // Check if this product is in the wishlist
+  const isWishlisted = wishlistItems.some((item) => item.productId === product?.id);
+  
   // Add to cart mutation
   const addToCartMutation = useMutation({
     mutationFn: async () => {
@@ -179,7 +188,7 @@ export default function ProductDetailPage() {
         <meta name="description" content={product.description.slice(0, 160)} />
       </Helmet>
       
-      <main className="py-8 bg-gray-50">
+      <main className="py-8 bg-gray-50 dark:bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
           <div className="flex items-center text-sm text-gray-500 mb-6">
@@ -193,7 +202,7 @@ export default function ProductDetailPage() {
           </div>
           
           {/* Product Details */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
               {/* Product Image */}
               <div className="flex justify-center">
@@ -287,73 +296,75 @@ export default function ProductDetailPage() {
                     <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
                       Quantity
                     </label>
-                    <div className="flex items-center border border-gray-300 rounded-md">
-                      <button 
-                        onClick={decreaseQuantity} 
-                        className="px-3 py-1 text-gray-500 hover:text-gray-700"
-                        disabled={quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="px-3 py-1 border-x border-gray-300 min-w-[40px] text-center">
-                        {quantity}
-                      </span>
-                      <button 
-                        onClick={increaseQuantity} 
-                        className="px-3 py-1 text-gray-500 hover:text-gray-700"
-                        disabled={product.stock <= quantity}
-                      >
-                        +
-                      </button>
+                    <div className="flex flex-col sm:flex-row gap-3 items-center">
+                      <div className="flex items-center gap-2 w-full sm:w-auto">
+                        <button 
+                          onClick={decreaseQuantity} 
+                          className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-l-md text-lg font-bold bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          disabled={quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="px-4 py-2 border-t border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg font-bold text-gray-900 dark:text-gray-100">
+                          {quantity}
+                        </span>
+                        <button 
+                          onClick={increaseQuantity} 
+                          className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-r-md text-lg font-bold bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          disabled={product.stock <= quantity}
+                        >
+                          +
+                        </button>
+                      </div>
+                      <div className="flex items-center text-sm">
+                        <span className="font-medium text-gray-900">Brand:</span>
+                        <span className="ml-1 text-gray-600">{product.brand}</span>
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center text-sm">
-                    <span className="font-medium text-gray-900">Brand:</span>
-                    <span className="ml-1 text-gray-600">{product.brand}</span>
+                  <div className="flex flex-col sm:flex-row gap-3 items-center">
+                    <Button 
+                      className="flex-1"
+                      onClick={() => addToCartMutation.mutate()}
+                      disabled={addToCartMutation.isPending || product.stock === 0}
+                    >
+                      {addToCartMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Adding...
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Add to Cart
+                        </>
+                      )}
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={() => addToWishlistMutation.mutate()}
+                      disabled={addToWishlistMutation.isPending}
+                      className={isWishlisted ? 'border-red-500 text-red-500' : ''}
+                    >
+                      {addToWishlistMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+                      )}
+                    </Button>
                   </div>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    className="flex-1"
-                    onClick={() => addToCartMutation.mutate()}
-                    disabled={addToCartMutation.isPending || product.stock === 0}
-                  >
-                    {addToCartMutation.isPending ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Adding...
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingCart className="mr-2 h-4 w-4" />
-                        Add to Cart
-                      </>
-                    )}
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={() => addToWishlistMutation.mutate()}
-                    disabled={addToWishlistMutation.isPending}
-                  >
-                    {addToWishlistMutation.isPending ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <Heart className="h-4 w-4" />
-                    )}
-                  </Button>
                 </div>
               </div>
             </div>
             
             {/* Product Details Tabs */}
-            <div className="border-t border-gray-200 p-6">
+            <div className="border-t border-gray-200 dark:border-gray-700 p-6">
               <Tabs defaultValue="specs">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="specs">Specifications</TabsTrigger>
                   <TabsTrigger value="desc">Description</TabsTrigger>
-                  <TabsTrigger value="reviews">Reviews ({product.reviewCount})</TabsTrigger>
+                  <TabsTrigger value="reviews">Reviews ({product.reviewCount || 0})</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="specs" className="pt-4">
@@ -400,7 +411,7 @@ export default function ProductDetailPage() {
                 </TabsContent>
                 
                 <TabsContent value="reviews" className="pt-4">
-                  {product.reviewCount > 0 ? (
+                  {Number(product.reviewCount) > 0 ? (
                     <p className="text-gray-600">Reviews will appear here. Currently, this product has {product.reviewCount} reviews with an average rating of {product.ratings} out of 5.</p>
                   ) : (
                     <p className="text-gray-600">No reviews yet. Be the first to review this product!</p>

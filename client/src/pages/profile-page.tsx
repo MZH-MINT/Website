@@ -43,7 +43,6 @@ const profileSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().optional(),
   address: z.string().optional(),
-  language: z.enum(["en", "hi"]),
 });
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
@@ -75,7 +74,6 @@ export default function ProfilePage() {
       email: user?.email || "",
       phone: user?.phone || "",
       address: user?.address || "",
-      language: (user?.language as "en" | "hi") || "en",
     },
   });
 
@@ -248,31 +246,6 @@ export default function ProfilePage() {
                                 <FormControl>
                                   <Input {...field} className="dark:bg-gray-700 dark:text-gray-200" />
                                 </FormControl>
-                                <FormMessage className="text-red-600 dark:text-red-400" />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="language"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Preferred Language</FormLabel>
-                                <Select 
-                                  onValueChange={field.onChange} 
-                                  defaultValue={field.value}
-                                >
-                                  <FormControl>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Select language" className="dark:bg-gray-700 dark:text-gray-200" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    <SelectItem value="en">English</SelectItem>
-                                    <SelectItem value="hi">Hindi</SelectItem>
-                                  </SelectContent>
-                                </Select>
                                 <FormMessage className="text-red-600 dark:text-red-400" />
                               </FormItem>
                             )}
